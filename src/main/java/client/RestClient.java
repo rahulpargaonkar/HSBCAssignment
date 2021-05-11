@@ -11,7 +11,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 public class RestClient {
-	private static RequestSpecification requestSpec;
+	private  RequestSpecification requestSpec;
 
 	public void setRequestSpecification(String baseURI) {
 

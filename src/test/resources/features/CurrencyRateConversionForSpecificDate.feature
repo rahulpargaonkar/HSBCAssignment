@@ -1,4 +1,4 @@
-Feature: Validate Latest Foreign Exchange rates 
+Feature: Validate Foreign Exchange rates for specific date
 
 Background: Pressetting API endpoint 
 	Given user has base endpoint 

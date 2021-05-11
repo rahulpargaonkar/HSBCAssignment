@@ -5,7 +5,7 @@ import java.util.List;
 import org.junit.Assert;
 
 import APIHelper.APIHelper;
-import APIHelper.RestHelper;
+import APIHelper.RestClient;
 import entity.CurrencyConversion;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -16,18 +16,19 @@ import io.restassured.response.Response;
 public class StepDefinitions {
 	private String baseURI = "https://api.ratesapi.io/api/";
 	private Response response;
+	RestClient restClient;
 
 	@Given("user has base endpoint")
 	public void user_has_base_endpoint() {
-
-		RestHelper.setRequestSpecification(baseURI);
+		restClient = new RestClient();
+		restClient.setRequestSpecification(baseURI);
 	}
 
 	@When("user wants to call API with date as {string}")
 	public void user_wants_to_call_api_with_date_as(String date) {
 
 		String finalDate = APIHelper.getDate(date);
-		response = RestHelper.callAPI(finalDate);
+		response = restClient.callAPI(finalDate);
 	}
 
 	@When("user wants to call API with date as {string} and Base as {string} and symbol as {string}")
@@ -35,7 +36,7 @@ public class StepDefinitions {
 			String symbols) {
 		String finalDate = APIHelper.getDate(date);
 		String uri = APIHelper.getFinalURI(finalDate, base, symbols);
-		response = RestHelper.callAPI(uri);
+		response = restClient.callAPI(uri);
 	}
 
 	@When("user wants to call API with date as {string} and Base as {string}")
@@ -43,7 +44,7 @@ public class StepDefinitions {
 
 		String finalDate = APIHelper.getDate(date);
 		String uri = APIHelper.getFinalURIWithBase(finalDate, base);
-		response = RestHelper.callAPI(uri);
+		response = restClient.callAPI(uri);
 	}
 
 	@When("user wants to call API with date as {string} and Symbols as {string}")
@@ -51,7 +52,7 @@ public class StepDefinitions {
 
 		String finalDate = APIHelper.getDate(date);
 		String uri = APIHelper.getFinalURIWithSymbols(finalDate, symbols);
-		response = RestHelper.callAPI(uri);
+		response = restClient.callAPI(uri);
 	}
 
 	@Then("response code should be (\\d+)$")
@@ -114,7 +115,7 @@ public class StepDefinitions {
 
 		CurrencyConversion currencyConversionLatestAPI = APIHelper.getObjectFromResponse(response);
 		String finalDate = APIHelper.getDate(date);
-		Response todaysDateAPIResponse = RestHelper.callAPI(finalDate);
+		Response todaysDateAPIResponse = restClient.callAPI(finalDate);
 		CurrencyConversion currencyConversionDatesApi = APIHelper.getObjectFromResponse(todaysDateAPIResponse);
 		Assert.assertEquals(currencyConversionDatesApi, currencyConversionLatestAPI);
 

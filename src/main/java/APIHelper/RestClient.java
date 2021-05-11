@@ -8,15 +8,15 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-public class RestHelper {
+public class RestClient {
 	private static RequestSpecification requestSpec;
 
-	public static void setRequestSpecification(String baseURI) {
+	public  void setRequestSpecification(String baseURI) {
 
 		requestSpec = (RequestSpecification) new RequestSpecBuilder().setBaseUri(baseURI).build();
 	}
 
-	public static Response callAPI(String date) {
+	public  Response callAPI(String date) {
 		// TODO Auto-generated method stub
 		Response response = given().spec(requestSpec).when().log().all().get(date);
 		System.out.println(response.getBody().asString());

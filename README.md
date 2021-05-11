@@ -1,4 +1,4 @@
-# HSBCAssignment
+# Assignment
     The Automation test framework developed for https://ratesapi.io/documentation/. 
     
 # Tech stack:

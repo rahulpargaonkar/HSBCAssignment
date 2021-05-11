@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.junit.Assert;
 
-import APIHelper.APIHelper;
-import APIHelper.RestClient;
+import client.APIHelper;
+import client.RestClient;
 import entity.CurrencyConversion;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

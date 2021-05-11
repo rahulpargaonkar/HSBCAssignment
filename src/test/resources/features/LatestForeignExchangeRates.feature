@@ -38,25 +38,25 @@ Feature: Validate Latest Foreign Exchange rates
     Then Response code should be 400
     
 @regression
-  Scenario: verify Default Base Is EURO for Latest API
+  Scenario: Verify Default Base Is EURO for Latest API
     When User calls Rates API with date as "latest"
     Then Response code should be 200
     And API should have Base "EUR" with some value in response
     
 @regression 
-  Scenario: verify Base and Symbol Both have Same Currency EURO
+  Scenario: Verify Base and Symbol Both have Same Currency EURO
     When User calls Rates API with date as "latest" and Base as "EUR" and symbol as "EUR"
     Then Response code should be 400
     And Response should have error message "Symbols 'EUR' are invalid for date"
     
 @regression
-  Scenario: verify Base And Symbol Both Same Currency INR
+  Scenario: Verify Base And Symbol Both Same Currency INR
     When User calls Rates API with date as "latest" and Base as "INR" and symbol as "INR"
     Then Response code should be 200
     And API should have Base "INR" and rates as "INR" with some value in response
     
 @regression 
-  Scenario: verify invalid Currency Code For Symbol
+  Scenario: Verify invalid Currency Code For Symbol
     When User calls Rates API with date as "latest" and Base as "Invalid" and symbol as "Invalid"
     Then Response code should be 400
     And Response should have error message "Base 'Invalid' is not supported"  

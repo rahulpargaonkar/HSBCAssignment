@@ -1,4 +1,4 @@
-package APIHelper;
+package client;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -18,16 +18,16 @@ public class APIHelper {
 	}
 
 	public static String getFinalURI(String finalDate, String base, String symbols) {
-		// TODO Auto-generated method stub
+		
 		return String.format("%s/?base=%s&symbols=%S", finalDate,base,symbols);
 	}
 
 	public static String getFinalURIWithSymbols(String finalDate, String symbols) {
-		// TODO Auto-generated method stub
+
 		return String.format("%s/?symbols=%S", finalDate,symbols);
 	}
 	public static String getFinalURIWithBase(String finalDate, String base) {
-		// TODO Auto-generated method stub
+		
 		return String.format("%s/?base=%S", finalDate,base);
 	}
 }

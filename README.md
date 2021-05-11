@@ -13,6 +13,7 @@
   # Test Report Screenshot:
   <img src="./test_report.PNG" alt="Your image title" width="300"/>
   
-  # How to Run Tests
-   E.g. mvn test -Dcucumber.filter.tags="@regression or ~@smoke"
-
+  # How to Execute Tests
+    - Execute all features : mvn test
+    - Execute smoke Scenarios: -Dcucumber.filter.tags="@smoke"
+    - Execute regression Scenarios: -Dcucumber.filter.tags="@regression"

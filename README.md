@@ -14,4 +14,5 @@
   <img src="./test_report.PNG" alt="Your image title" width="300"/>
   
   # How to Run Tests
-   mvn test -Dcucumber.options="--tags @regression"
+   E.g. mvn test -Dcucumber.filter.tags="@regression or ~@smoke"
+

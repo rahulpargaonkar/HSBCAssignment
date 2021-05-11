@@ -1,6 +1,8 @@
 package APIHelper;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 import entity.CurrencyConversion;
 //import entity.CurrentcyConversion;
@@ -18,6 +20,7 @@ public class APIHelper {
 			finalDate=LocalDate.now().plusDays(1).toString();
 		}
 		else if(date.toString().equalsIgnoreCase("todaysDate")) {
+			
 			finalDate=LocalDate.now().toString();
 		}
 		else {

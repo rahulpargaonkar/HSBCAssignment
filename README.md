@@ -13,5 +13,5 @@
   # Test Report Screenshot:
   <img src="./test_report.PNG" alt="Your image title" width="300"/>
   
-  #How to Run Tests
+  # How to Run Tests
    mvn test -Dcucumber.options="--tags @regression"

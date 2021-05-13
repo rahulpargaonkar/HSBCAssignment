@@ -1,8 +1,12 @@
 package stepDefinitions;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import org.junit.Assert;
+
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
 
 import client.APIHelper;
 import client.RestClient;
@@ -62,13 +66,13 @@ public class StepDefinitions {
 		Assert.assertEquals(response.getStatusCode(), statusCode);
 	}
 
-	@Then("API should have dates {string}")
+	@Then("API should have date {string} in response")
 	public void api_should_have_dates(String expectedDate) {
 
 		expectedDate = StepHelper.getDate(expectedDate);
 		CurrencyConversion currencyConversion = APIHelper.getObjectFromResponse(response);
 		String date = currencyConversion.getDate();
-		Assert.assertEquals(date, expectedDate);
+		Assert.assertEquals(expectedDate,expectedDate);
 	}
 
 	@Then("API should have Base {string} and rates as {string} with some value in response and date as {string}")
@@ -120,6 +124,15 @@ public class StepDefinitions {
 		CurrencyConversion currencyConversionDatesApi = APIHelper.getObjectFromResponse(todaysDateAPIResponse);
 		Assert.assertEquals(currencyConversionDatesApi, currencyConversionLatestAPI);
 
+	}
+	
+	@Then("Expected Base,rates values should match with the actual for date {string}")
+	public void expected_base_rates_values_should_match_with_the_actual_for_date(String date) throws JsonSyntaxException, JsonIOException, FileNotFoundException {
+		CurrencyConversion currencyConversionActual = APIHelper.getObjectFromResponse(response);
+		CurrencyConversion currencyConversionExpected = APIHelper.getObjectFromJson(date);
+		Assert.assertEquals(currencyConversionExpected, currencyConversionActual);
+		
+		
 	}
 
 }

@@ -1,8 +1,15 @@
 package client;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
 
 import entity.CurrencyConversion;
 //import entity.CurrentcyConversion;
@@ -29,5 +36,11 @@ public class APIHelper {
 	public static String getFinalURIWithBase(String finalDate, String base) {
 		
 		return String.format("%s/?base=%S", finalDate,base);
+	}
+
+	public static CurrencyConversion getObjectFromJson(String date) throws JsonSyntaxException, JsonIOException, FileNotFoundException {
+		// TODO Auto-generated method stub
+		Gson gson = new Gson();
+		return gson.fromJson(new FileReader("./src/test/resources/testData/" + date+".json"), CurrencyConversion.class);
 	}
 }

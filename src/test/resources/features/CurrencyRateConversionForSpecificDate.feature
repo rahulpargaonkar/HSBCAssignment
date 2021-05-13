@@ -7,7 +7,7 @@ Background: Pressetting API endpoint
 Scenario: Verify that the rates with dates  API'sresponse is Successful
 	When User calls Rates API with date as "2021-03-02" 
 	Then Response code should be 200 
-	And API should have dates "2021-03-02"
+	And Expected Base,rates values should match with the actual for date "2021-03-02" 
 	
 @regression	
 Scenario: Verify Base And Symbol Both Same Currency INR for specific date 
@@ -37,6 +37,7 @@ Scenario: Verify for Older Date than 1999_01_04
 Scenario: Verify for future date 
 	When User calls Rates API with date as "futureDate" 
 	Then Response code should be 200 
+	Then API should have date "yesterdaysDate" in response
 	
 @regression		
 Scenario: Verify for specific date where currency does not exists 

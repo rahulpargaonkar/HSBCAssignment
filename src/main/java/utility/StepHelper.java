@@ -13,6 +13,10 @@ public class StepHelper {
 			finalDate=LocalDate.now().plusDays(1).toString();
 			return finalDate;
 		}
+		else if(date.toString().equalsIgnoreCase("yesterdaysDate")){
+			finalDate=LocalDate.now().minusDays(1).toString();
+			return finalDate;
+		}
 		
 		return date.toString();
 	}

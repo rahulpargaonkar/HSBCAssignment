@@ -1,6 +1,7 @@
 package stepDefinitions;
 
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Assert;
@@ -72,7 +73,7 @@ public class StepDefinitions {
 		expectedDate = StepHelper.getDate(expectedDate);
 		CurrencyConversion currencyConversion = APIHelper.getObjectFromResponse(response);
 		String date = currencyConversion.getDate();
-		Assert.assertEquals(expectedDate,expectedDate);
+		Assert.assertEquals(expectedDate,date );
 	}
 
 	@Then("API should have Base {string} and rates as {string} with some value in response and date as {string}")
@@ -81,9 +82,9 @@ public class StepDefinitions {
 
 		expectedDate = StepHelper.getDate(expectedDate).toString();
 		List<String> actualRates = response.jsonPath().get("rates.collect{it.key}");
-		Assert.assertTrue(actualRates.stream().allMatch(rateKey -> expectedSymbols.contains(rateKey)));
-		response.then().body("date", equalTo(expectedDate));
-		response.then().body("base", equalTo(expectedBase));
+		Assert.assertArrayEquals(expectedSymbols.split(","), actualRates.toArray());
+		Assert.assertEquals(response.body().jsonPath().get("date"),expectedDate);
+		Assert.assertEquals(response.body().jsonPath().get("base"),expectedBase);
 	}
 
 	@Then("Response should have error message {string}")
@@ -97,8 +98,7 @@ public class StepDefinitions {
 
 		List<String> actualRates = response.jsonPath().get("rates.collect{it.key}");
 
-		Assert.assertTrue(actualRates.stream().allMatch(rateKey -> expectedSymbols.contains(rateKey)));
-
+		Assert.assertArrayEquals(expectedSymbols.split(","), actualRates.toArray());
 	}
 
 	@Then("API should have Base {string} with some value in response")
@@ -111,8 +111,8 @@ public class StepDefinitions {
 	public void api_should_have_base_and_rates_as_with_some_value_in_response(String expectedBase,
 			String expectedSymbols) {
 		List<String> actualRates = response.jsonPath().get("rates.collect{it.key}");
-		Assert.assertTrue(actualRates.stream().allMatch(rateKey -> expectedSymbols.contains(rateKey)));
-		response.then().body("base", equalTo(expectedBase));
+		Assert.assertArrayEquals(expectedSymbols.split(","), actualRates.toArray());
+		Assert.assertEquals(response.body().jsonPath().get("base"),expectedBase);
 	}
 
 	@Then("API response should have date as {string} and validate the response with privoius resposnse")

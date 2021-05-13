@@ -20,7 +20,7 @@ public class RestClient {
 
 	public Response getCurrencyRatesResponse(String uri) {
 
-		Response response = given().spec(requestSpec).when().log().all().get(uri);
+		Response response = given().spec(requestSpec).when().log().uri().get(uri);
 		return response;
 	}
 
